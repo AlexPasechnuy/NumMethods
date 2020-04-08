@@ -1,0 +1,7 @@
+D:\Alex\Work\Study\Programming\C#\NumMethods\NumMethods\bin\Debug\NumMethods.exe.config
+D:\Alex\Work\Study\Programming\C#\NumMethods\NumMethods\bin\Debug\NumMethods.exe
+D:\Alex\Work\Study\Programming\C#\NumMethods\NumMethods\bin\Debug\NumMethods.pdb
+D:\Alex\Work\Study\Programming\C#\NumMethods\NumMethods\obj\Debug\NumMethods.csprojAssemblyReference.cache
+D:\Alex\Work\Study\Programming\C#\NumMethods\NumMethods\obj\Debug\NumMethods.csproj.CoreCompileInputs.cache
+D:\Alex\Work\Study\Programming\C#\NumMethods\NumMethods\obj\Debug\NumMethods.exe
+D:\Alex\Work\Study\Programming\C#\NumMethods\NumMethods\obj\Debug\NumMethods.pdb
