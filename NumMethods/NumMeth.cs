@@ -33,6 +33,23 @@ namespace NumMethods
             }
         }
 
+        public static double[] SolveGauss(double[,] matrix)
+        {
+
+            SetLowerNull(matrix);
+            double[] res = new double[matrix.GetLength(0)];
+            for (int i = matrix.GetLength(0) - 1; i >= 0; i--)
+            {
+                double sum = 0;
+                for (int j = i + 1; j < matrix.GetLength(1) - 1; j++)
+                {
+                    sum += res[j] * matrix[i, j];
+                }
+                res[i] = Math.Round((matrix[i, matrix.GetLength(1) - 1] - sum) / (matrix[i, i]), 2);
+            }
+            return res;
+        }
+
         public static void PrintArr(double[] arr)
         {
                 for (int i = 0; i < arr.Length; i++)

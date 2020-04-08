@@ -11,7 +11,9 @@ namespace NumMethods
             int rows = Convert.ToInt32(str[0]);
             int collumns = Convert.ToInt32(str[1]);
             double[,] matr = NumMeth.InputMatrix(rows, collumns);
-            NumMeth.PrintMatr(matr);
+            Console.Write("Roots of system using Gauss method are: ");
+            double[] res = NumMeth.SolveGauss(matr);
+            NumMeth.PrintArr(res);
             Console.ReadKey();
         }
     }
