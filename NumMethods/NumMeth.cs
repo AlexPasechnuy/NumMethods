@@ -6,8 +6,8 @@ namespace NumMethods
     {
         public static double[,] InputMatrix(int rows, int collumns)
         {
-            double[,] res = new double[rows,collumns];
-            for(int i = 0; i < rows; i++)
+            double[,] res = new double[rows, collumns];
+            for (int i = 0; i < rows; i++)
             {
                 string[] str = Console.ReadLine().Split();
                 for (int j = 0; j < collumns; j++)
@@ -50,12 +50,46 @@ namespace NumMethods
             return res;
         }
 
+        public static double[] SolveSimpleIter(double[,] matrix, int eps)
+        {
+            double[] prevx = new double[matrix.GetLength(0)];
+            double[] x = new double[matrix.GetLength(0)];
+            iteration();
+            void iteration()
+            {
+                Array.Copy(x, prevx, x.Length);
+                for (int i = 0; i < matrix.GetLength(0); i++)
+                {
+                    double sum = 0;
+                    for (int j = 0; j < matrix.GetLength(1) - 1; j++)
+                    {
+                        if (j != i)
+                        {
+                            sum += matrix[i, j] * prevx[j];
+                        }
+                    }
+                    x[i] = (1 / matrix[i, i]) * (matrix[i, matrix.GetLength(1) - 1] - sum);
+                }
+                for (int i = 0; i < x.Length; i++)
+                {
+                    if (Math.Round(x[i], eps) != Math.Round(prevx[i], eps))
+                    {
+                        iteration();
+                    }
+                }
+                return;
+            }
+            return x;
+        }
+
+
+
         public static void PrintArr(double[] arr)
         {
-                for (int i = 0; i < arr.Length; i++)
-                {
-                    Console.Write(Math.Round(arr[i], 3) + " ");
-                }
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.Write(Math.Round(arr[i], 3) + " ");
+            }
         }
 
         public static void PrintMatr(double[,] matrix)
