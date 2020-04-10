@@ -82,7 +82,16 @@ namespace NumMethods
             return x;
         }
 
-
+        public static double GaussDeter(double[,] matrix)
+        {
+            SetLowerNull(matrix);
+            double deter = 1;
+            for (int i = 0; i < matrix.GetLength(1); i++)
+            {
+                deter *= matrix[i, i];
+            }
+            return deter;
+        }
 
         public static void PrintArr(double[] arr)
         {
