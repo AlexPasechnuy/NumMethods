@@ -16,7 +16,7 @@ namespace NumMethods
                 {0.11, 0.23, -1, 0.51, -1.2 },
                 {0.17, -0.21, 0.31, -1.0, 0.17 } };
             Console.Write("Roots of system using Gauss method are: ");
-            double[] res = NumMeth.SolveGauss(matrEq);
+            double[] res = NumMeth.GaussSolve(matrEq);
             NumMeth.PrintArr(res);
             Console.WriteLine();
             Console.Write("Roots of system using simple iteration  method are: ");
@@ -28,6 +28,13 @@ namespace NumMethods
                 {-0.36, 0.86, 1, -0.64 } };
             Console.WriteLine();
             Console.WriteLine("Determinant of matrix is " + NumMeth.GaussDeter(matr));
+            Console.WriteLine("Inversed matrix:");
+            double[,] matrinv = {{0.54, 0.32, 1, 0.22},
+            {0.66, 0.44, 0.22, 1 },
+            {1, 0.42, 0.54, 0.66 },
+            {0.42, 1, 0.32, 0.44 } };
+            double[,] inversed = NumMeth.GaussInverse(matrinv);
+            NumMeth.PrintMatr(inversed);
             Console.ReadKey();
         }
     }

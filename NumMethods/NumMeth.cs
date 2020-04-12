@@ -18,25 +18,28 @@ namespace NumMethods
             return res;
         }
 
-        private static void SetLowerNull(double[,] matrix)
+        private static double[,] SetLowerNull(double[,] matrix)
         {
-            for (int i = 0; i < matrix.GetLength(0); i++)
+            double[,] res = new double[matrix.GetLength(0), matrix.GetLength(1)];
+            Array.Copy(matrix, res, matrix.Length);
+            for (int i = 0; i < res.GetLength(0); i++)
             {
-                for (int j = matrix.GetLength(0) - 1; j > i; j--)
+                for (int j = res.GetLength(0) - 1; j > i; j--)
                 {
-                    double coef = matrix[j, i] / matrix[j - 1, i];
-                    for (int k = 0; k < matrix.GetLength(1); k++)
+                    double coef = res[j, i] / res[j - 1, i];
+                    for (int k = 0; k < res.GetLength(1); k++)
                     {
-                        matrix[j, k] -= coef * matrix[j - 1, k];
+                        res[j, k] -= coef * res[j - 1, k];
                     }
                 }
             }
+            return res;
         }
 
-        public static double[] SolveGauss(double[,] matrix)
+        public static double[] GaussSolve(double[,] matrix)
         {
 
-            SetLowerNull(matrix);
+            matrix = SetLowerNull(matrix);
             double[] res = new double[matrix.GetLength(0)];
             for (int i = matrix.GetLength(0) - 1; i >= 0; i--)
             {
@@ -84,13 +87,50 @@ namespace NumMethods
 
         public static double GaussDeter(double[,] matrix)
         {
-            SetLowerNull(matrix);
+            double[,] temp = SetLowerNull(matrix);
             double deter = 1;
-            for (int i = 0; i < matrix.GetLength(1); i++)
+            for (int i = 0; i < temp.GetLength(1); i++)
             {
-                deter *= matrix[i, i];
+                deter *= temp[i, i];
             }
             return deter;
+        }
+
+        public static double[,] GaussInverse(double[,] matrix)
+        {
+            double[,] res = new double[matrix.GetLength(0), matrix.GetLength(1) * 2];
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    res[i, j] = matrix[i, j];
+                }
+                res[i, i + matrix.GetLength(1)] = 1;
+            }
+            double[,] prev = new double[res.GetLength(0), res.GetLength(1)];
+            for (int i = 0; i < res.GetLength(0); i++)
+            {
+                Array.Copy(res, prev, res.Length);
+                for (int j = 0; j < res.GetLength(0); j++)
+                {
+                    for (int k = 0; k < res.GetLength(1); k++)
+                    {
+                        if (j == i)
+                            res[j, k] /= prev[i, i];
+                        else
+                            res[j, k] -= (prev[j, i] * prev[i, k]) / prev[i, i];
+                    }
+                }
+            }
+            double[,] inversed = new double[res.GetLength(0), res.GetLength(1) / 2];
+            for (int i = 0; i < res.GetLength(0); i++)
+            {
+                for (int j = 0; j < res.GetLength(1)/2; j++)
+                {
+                    inversed[i, j] = res[i, j + res.GetLength(1) / 2];
+                }
+            }
+            return inversed;
         }
 
         public static void PrintArr(double[] arr)
