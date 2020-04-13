@@ -37,8 +37,8 @@ namespace NumMethods
             {0.42, 1, 0.32, 0.44 } };
             double[,] inversed = NumMeth.GaussInverse(matrinv);
             NumMeth.PrintMatr(inversed);
-            Console.WriteLine("¬ведите выражение на €зыке JScript");
-            Console.WriteLine(NumMeth.Eval(Console.ReadLine(),10));
+            Console.Write("x = 14; Math.max(x*x,Math.exp(x))/Math.sqrt(x) = ");
+            Console.WriteLine(NumMeth.Eval("Math.max(x*x,Math.exp(x))/Math.sqrt(x)",14));
             Console.ReadKey();
         }
     }

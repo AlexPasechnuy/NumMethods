@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace NumMethods
 {
@@ -175,7 +176,6 @@ namespace NumMethods
                 }
                 pos = expr.Substring(pos + temp).IndexOf("x") + pos + temp;
             }
-            Console.WriteLine(expr);
             var result = scriptControl.Eval(expr);
             Marshal.ReleaseComObject(scriptControl);
             return result;
