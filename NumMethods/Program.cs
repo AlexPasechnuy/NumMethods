@@ -1,5 +1,7 @@
 using System;
 
+using System.Runtime.InteropServices;
+
 namespace NumMethods
 {
     class Program
@@ -35,6 +37,8 @@ namespace NumMethods
             {0.42, 1, 0.32, 0.44 } };
             double[,] inversed = NumMeth.GaussInverse(matrinv);
             NumMeth.PrintMatr(inversed);
+            Console.WriteLine("¬ведите выражение на €зыке JScript");
+            Console.WriteLine(NumMeth.Eval(Console.ReadLine(),10));
             Console.ReadKey();
         }
     }

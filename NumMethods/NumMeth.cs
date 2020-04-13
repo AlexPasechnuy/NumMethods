@@ -152,5 +152,33 @@ namespace NumMethods
                 Console.WriteLine();
             }
         }
+
+        public static object Eval(string expr, double x)
+        {
+            var t = Type.GetTypeFromProgID("ScriptControl");
+            dynamic scriptControl = Activator.CreateInstance(t);
+            scriptControl.Language = "JavaScript";
+            int xLength = x.ToString().Length;
+            int pos = expr.IndexOf("x");
+            while (pos != -1)
+            {
+                int temp = 1;
+                if (expr[pos - 1] != 'e' && expr[pos - 1] != 'a')
+                {
+                    expr = expr.Substring(0, pos) + x.ToString() +
+                        expr.Substring(pos + 1);
+                    temp = xLength;
+                }
+                if (expr.Substring(pos + temp).IndexOf("x") == -1)
+                {
+                    break;
+                }
+                pos = expr.Substring(pos + temp).IndexOf("x") + pos + temp;
+            }
+            Console.WriteLine(expr);
+            var result = scriptControl.Eval(expr);
+            Marshal.ReleaseComObject(scriptControl);
+            return result;
+        }
     }
 }
