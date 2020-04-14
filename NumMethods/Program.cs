@@ -41,6 +41,7 @@ namespace NumMethods
             Console.WriteLine(NumMeth.Eval("Math.max(x*x,Math.exp(x))/Math.sqrt(x)",14));
             MyFunc my = new MyFunc();
             Console.WriteLine("Solved by Newton method: " + NumMeth.NewtonSolve(my,-1,0,3));
+            Console.WriteLine("Solved by iteration method: " + NumMeth.IterationSolve(my, -1, 0, 3));
             Console.ReadKey();
         }
     }

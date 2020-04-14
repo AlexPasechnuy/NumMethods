@@ -217,5 +217,17 @@ namespace NumMethods
             }while (Math.Round(x,eps) != Math.Round(prev, eps));
             return x;
         }
+
+        public static double IterationSolve(IFunc func, double from, double to, int eps)
+        {
+            double x, prev;
+            prev = x = from;
+            do
+            {
+                prev = x;
+                x = func.Xequals(prev);
+            } while (Math.Round(x, eps) != Math.Round(prev, eps));
+            return x;
+        }
     }
 }
