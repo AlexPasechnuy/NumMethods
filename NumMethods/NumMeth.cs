@@ -3,6 +3,31 @@ using System.Runtime.InteropServices;
 
 namespace NumMethods
 {
+    public interface IFunc
+    {
+        double Func(double x);
+        double Deriv(double x);
+        double Xequals(double x);
+    }
+
+    class MyFunc : IFunc
+    {
+        public double Func(double x)
+        {
+            return x + 1 / (Math.Pow(x, 2) + 1);
+        }
+
+        public double Deriv(double x)
+        {
+            return 1 - (2 * x) / Math.Pow(Math.Pow(x, 2) + 1, 2);
+        }
+
+        public double Xequals(double x)
+        {
+            return -1 / (Math.Pow(x, 2) + 1);
+        }
+    }
+     
     class NumMeth
     {
         public static double[,] InputMatrix(int rows, int collumns)
@@ -154,7 +179,7 @@ namespace NumMethods
             }
         }
 
-        public static object Eval(string expr, double x)
+        public static double Eval(string expr, double x)
         {
             var t = Type.GetTypeFromProgID("ScriptControl");
             dynamic scriptControl = Activator.CreateInstance(t);
@@ -179,6 +204,18 @@ namespace NumMethods
             var result = scriptControl.Eval(expr);
             Marshal.ReleaseComObject(scriptControl);
             return result;
+        }
+
+        public static double NewtonSolve(IFunc func, double from, double to, int eps)
+        {
+            double x, prev;
+            prev = x = from;
+            do
+            {
+                prev = x;
+                x = prev - func.Func(prev) / func.Deriv(prev);
+            }while (Math.Round(x,eps) != Math.Round(prev, eps));
+            return x;
         }
     }
 }
