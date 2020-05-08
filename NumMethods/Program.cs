@@ -15,9 +15,11 @@ namespace NumMethods
             Console.Write("Roots of system using Gauss method are: ");
             double[] res = NumMeth.GaussSolve(matrEq);
             NumMeth.PrintArr(res);
-            Console.WriteLine();
-            Console.Write("Roots of system using simple iteration  method are: ");
+            Console.Write("\nRoots of system using simple iteration  method are: ");
             res = NumMeth.SolveSimpleIter(matrEq, 5);
+            NumMeth.PrintArr(res);
+            Console.Write("\nRoots of system using Gauss-Zeidel method are: ");
+            res = NumMeth.GaussZeidel(matrEq, 5);
             NumMeth.PrintArr(res);
             double[,] matr = {{ 0.49, 0.7, 0.62, -0.32},
                 {1, 0.17, -0.35, 0.16 },
