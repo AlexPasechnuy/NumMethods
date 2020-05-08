@@ -83,8 +83,7 @@ namespace NumMethods
         {
             double[] prevx = new double[matrix.GetLength(0)];
             double[] x = new double[matrix.GetLength(0)];
-            iteration();
-            void iteration()
+            while(true)
             {
                 Array.Copy(x, prevx, x.Length);
                 for (int i = 0; i < matrix.GetLength(0); i++)
@@ -101,14 +100,12 @@ namespace NumMethods
                 }
                 for (int i = 0; i < x.Length; i++)
                 {
-                    if (Math.Round(x[i], eps) != Math.Round(prevx[i], eps))
+                    if (Math.Round(x[i], eps) == Math.Round(prevx[i], eps))
                     {
-                        iteration();
+                        return x;
                     }
                 }
-                return;
             }
-            return x;
         }
 
         public static double GaussDeter(double[,] matrix)
